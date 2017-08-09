@@ -3,6 +3,7 @@
 #include <windows.h>
 #include <stdio.h>
 #include <time.h>
+#include <tchar.h>
 //#pragma comment( linker, "/subsystem:\"windows\" /entry:\"mainCRTStartup\"")
 
 //查找当前目录下创建时间超过DAYS天的文件夹,如果超过七天就对此文件夹用rar进行压缩并删除原文件夹
@@ -10,7 +11,24 @@
 typedef bool (WINAPI *EnumerateFunc)(LPCSTR lpFileOrPath, void* pUserData);
 
 const int DAYS = 7;
-
+//将TCHAR转为char
+//*tchar是TCHAR类型指针，*_char是char类型指针
+//void TcharToChar(const TCHAR * tchar, char * _char)
+//{
+//    int iLength ;
+//    //获取字节长度
+//    iLength = WideCharToMultiByte(CP_ACP, 0, tchar, -1, NULL, 0, NULL, NULL);
+//    //将tchar值赋给_char
+//    WideCharToMultiByte(CP_ACP, 0, tchar, -1, _char, iLength, NULL, NULL);
+//}
+//
+//void CharToTchar(const char * _char, TCHAR * tchar)
+//{
+//    int iLength ;
+//
+//    iLength = MultiByteToWideChar(CP_ACP, 0, _char, strlen(_char) + 1, NULL, 0) ;
+//    MultiByteToWideChar(CP_ACP, 0, _char, strlen(_char) + 1, tchar, iLength) ;
+//}
 //无窗口执行cmd命令行
 bool ExeCuteCommand(const std::string& command)
 {
@@ -28,7 +46,7 @@ bool ExeCuteCommand(const std::string& command)
     char* commandLine = &commandLineStr.front();
     auto creationFlags = CREATE_NO_WINDOW;
 
-    CreateProcessA(applicationName, commandLine, nullptr, nullptr, 0, creationFlags, nullptr, nullptr, &startupInfo, &processInfo);
+    CreateProcess(applicationName, commandLine, nullptr, nullptr, 0, creationFlags, nullptr, nullptr, &startupInfo, &processInfo);
     WaitForSingleObject(processInfo.hProcess, 30 * 1000);
     DWORD exitCode;
     GetExitCodeProcess(processInfo.hProcess, &exitCode);
