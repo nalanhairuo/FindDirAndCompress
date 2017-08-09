@@ -298,7 +298,7 @@ bool WINAPI myEnumerateFunc(LPCSTR lpFileOrPath, void* pUserData)
     char szCommand[MAX_PATH];//ÃüÁîÐÐ²ÎÊý
     sprintf_s(szCommand, "C:\\Progra~1\\WinRar\\Rar.exe a -m5 -ep -df %s.rar %s", compressFileName, lpFileOrPath);
 
-    //sprintf(szCommand, "C:\\Progra~1\\WinRar\\Rar.exe a -m5 -ep %s.rar %s", compressFileName, lpFileOrPath);
+    // sprintf(szCommand, "C:\\Progra~1\\WinRar\\Rar.exe a -m5 -ep %s.rar %s", compressFileName, lpFileOrPath);
     // printf("%s\n",szCommand);
     if (days > DAYS)
     {
@@ -307,7 +307,7 @@ bool WINAPI myEnumerateFunc(LPCSTR lpFileOrPath, void* pUserData)
         //Sleep(60000);
     }
 
-    return TRUE;
+    return true;
 }
 
 int main(void)
